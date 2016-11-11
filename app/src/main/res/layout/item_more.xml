@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:id="@+id/tx_heard"
+        android:text="热门推荐"
+        android:drawableStart="@drawable/item_more"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:textSize="16sp"
+        android:drawableEnd="@mipmap/more"
+        android:textColor="@android:color/black"
+        />
+
+</LinearLayout>
