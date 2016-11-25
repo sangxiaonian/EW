@@ -16,7 +16,7 @@ import em.sang.com.ew.mode.bean.SearchBean;
  */
 public class DetailsAdapter extends PagerAdapter {
 
-    private List<String> lists = new ArrayList<>();
+    private List<SearchBean.ShowapiResBodyBean.CbListBean.ImgListBean> lists = new ArrayList<>();
 
     public DetailsAdapter (List<SearchBean.ShowapiResBodyBean.CbListBean.ImgListBean> lists){
         this.lists=lists;

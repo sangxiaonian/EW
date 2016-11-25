@@ -78,7 +78,7 @@ public class MainData implements IMainData {
                 }).filter(new Func1<SearchBean.ShowapiResBodyBean.CbListBean, Boolean>() {
             @Override
             public Boolean call(SearchBean.ShowapiResBodyBean.CbListBean cbListBean) {
-                return cbListBean.imgList!=null&&cbListBean.imgList.size()>0&& TextUtils.isEmpty(cbListBean.cbId);
+                return cbListBean.imgList!=null&&cbListBean.imgList.size()>0&& !TextUtils.isEmpty(cbListBean.cbId);
             }
         })
                 .observeOn(AndroidSchedulers.mainThread())
