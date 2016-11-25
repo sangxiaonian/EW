@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import em.sang.com.allrecycleview.adapter.DefaultAdapter;
 import em.sang.com.allrecycleview.holder.CustomBasicHolder;
 import em.sang.com.allrecycleview.inter.DefaultRecycleViewLisenter;
 import em.sang.com.ew.R;
-import em.sang.com.allrecycleview.adapter.DefaultAdapter;
 import em.sang.com.ew.basic.BasicActivity;
 import em.sang.com.ew.basic.WFApplication;
 import em.sang.com.ew.mode.bean.SearchBean.ShowapiResBodyBean.CbListBean;
@@ -39,14 +39,16 @@ public class MainActivity extends BasicActivity implements IMainView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         ((WFApplication) getApplicationContext()).loadProperty("config.properties");
+        setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+
 
 
     }
 
-
+    List<CbListBean> heards;
+    List<CbListBean> lists;
     @Override
     public void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolBar);
@@ -67,6 +69,14 @@ public class MainActivity extends BasicActivity implements IMainView {
                 ToastUtil.showTextToast(mContext, "更多");
             }
         });
+         heards = new ArrayList<>();
+        lists  =new ArrayList<>();
+
+        LinearLayoutManager manager = new GridLayoutManager(mContext, 2);
+        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.addItemDecoration(new DefaultGrideCutLine(this,R.drawable.item_cut));
+
     }
 
     @Override
@@ -91,9 +101,10 @@ public class MainActivity extends BasicActivity implements IMainView {
     @Override
     public void setAdapter(List<CbListBean> lists) {
         int index = new Random().nextInt(lists.size());
-        List<CbListBean> heards = new ArrayList<>();
+        heards.clear();
         heards.add(lists.get(index));
         lists.remove(index);
+        this.lists = lists;
         adapter = new DefaultAdapter<CbListBean>(mContext, lists, R.layout.item_main, new DefaultRecycleViewLisenter<CbListBean>(){
             @Override
             public CustomBasicHolder getBodyHolder(Context context, final List<CbListBean> lists, int itemID) {
@@ -107,12 +118,9 @@ public class MainActivity extends BasicActivity implements IMainView {
                     }
                 };
             }});
-        adapter.addHead(new MainHeaderHolder (this, heards.get(0), R.layout.item_heard));
+
+        adapter.addHead(new MainHeaderHolder(this, heards.get(0), R.layout.item_heard));
         adapter.addHead(new MainMoreHolder(this, null, R.layout.item_more));
-        LinearLayoutManager manager = new GridLayoutManager(mContext, 2);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.addItemDecoration(new DefaultGrideCutLine(this,R.drawable.item_cut));
         recyclerView.setAdapter(adapter);
     }
 

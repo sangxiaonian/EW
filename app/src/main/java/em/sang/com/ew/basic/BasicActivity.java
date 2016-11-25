@@ -18,14 +18,14 @@ public abstract class BasicActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext =this;
-
+        initView();
+        intDatas();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        initView();
-        intDatas();
+
     }
 
     @Override
