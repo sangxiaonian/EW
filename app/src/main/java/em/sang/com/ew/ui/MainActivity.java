@@ -1,6 +1,7 @@
 package em.sang.com.ew.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,8 +73,6 @@ public class MainActivity extends BasicActivity implements IMainView {
     public void intDatas() {
         super.intDatas();
         pre = new MainPresenter(this);
-
-
     }
 
 
@@ -98,7 +97,15 @@ public class MainActivity extends BasicActivity implements IMainView {
         adapter = new DefaultAdapter<CbListBean>(mContext, lists, R.layout.item_main, new DefaultRecycleViewLisenter<CbListBean>(){
             @Override
             public CustomBasicHolder getBodyHolder(Context context, final List<CbListBean> lists, int itemID) {
-                return new MainBodyHolder<>(context, lists, itemID);
+                return new MainBodyHolder<CbListBean>(context, lists, itemID){
+                    @Override
+                    public void onClickHolder(CbListBean id) {
+
+                        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+                        intent.putExtra("details",id);
+                        startActivity(intent);
+                    }
+                };
             }});
         adapter.addHead(new MainHeaderHolder (this, heards.get(0), R.layout.item_heard));
         adapter.addHead(new MainMoreHolder(this, null, R.layout.item_more));

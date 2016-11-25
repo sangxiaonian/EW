@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-import em.sang.com.allrecycleview.R;
+import em.sang.com.allrecycleview.adapter.CustomBasicAdapter;
 
 /**
  * Description：
@@ -173,16 +173,21 @@ public class DefaultGrideCutLine extends RecyclerView.ItemDecoration {
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
         super.getItemOffsets(outRect, itemPosition, parent);
             int intrinsicHeight = mDivider.getIntrinsicHeight();
+//            intrinsicHeight = Apputils.dip2px((parent.getContext()),10);
             int spanCount = getSpanCount(parent);
             int childCount = parent.getAdapter().getItemCount();
-            if (itemPosition == 0) {
-                outRect.set(0, 0, 0, 0);
-            } else if (itemPosition == 1) {
+            CustomBasicAdapter adapter = (CustomBasicAdapter) parent.getAdapter();
+            int head = adapter.heards.size();
 
-                outRect.set(2 * intrinsicHeight, 0, 2 * intrinsicHeight, 0);
-            } else if (isFirstColum(parent, itemPosition, spanCount, childCount)) {
+        JLog.i(head+"====================================="+spanCount);
+
+            if (itemPosition == 0) {
+                outRect.set(0, 0, 0, intrinsicHeight);
+            } else if (itemPosition == 1) {
+                outRect.set(2 * intrinsicHeight, 0, 2 * intrinsicHeight, intrinsicHeight);
+            } else if (head<=itemPosition&& isFirstColum(parent, itemPosition, spanCount, childCount)) {
                 outRect.set(2 * intrinsicHeight, 0, intrinsicHeight, intrinsicHeight);
-            } else if (isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
+            } else if (head<=itemPosition && isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
             {
                 outRect.set(0, 0, intrinsicHeight * 2, intrinsicHeight);
             } else {

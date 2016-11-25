@@ -1,5 +1,8 @@
 package em.sang.com.ew.mode.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 import em.sang.com.ew.basic.BasicBean;
@@ -42,7 +45,7 @@ public class SearchBean extends BasicBean<SearchBean.ShowapiResBodyBean>{
                     '}';
         }
 
-        public static class CbListBean {
+        public static class CbListBean implements Parcelable{
 
 
             /**
@@ -82,6 +85,30 @@ public class SearchBean extends BasicBean<SearchBean.ShowapiResBodyBean>{
              */
             public List<ImgListBean> imgList;
 
+            protected CbListBean(Parcel in) {
+                cbId = in.readString();
+                cl = in.readString();
+                introduce = in.readString();
+                mainType = in.readString();
+                name = in.readString();
+                type = in.readString();
+                zf = in.readString();
+                knack = in.readString();
+                imgList = in.createTypedArrayList(ImgListBean.CREATOR);
+            }
+
+            public static final Creator<CbListBean> CREATOR = new Creator<CbListBean>() {
+                @Override
+                public CbListBean createFromParcel(Parcel in) {
+                    return new CbListBean(in);
+                }
+
+                @Override
+                public CbListBean[] newArray(int size) {
+                    return new CbListBean[size];
+                }
+            };
+
             @Override
             public String toString() {
                 return "CbListBean{" +
@@ -97,17 +124,61 @@ public class SearchBean extends BasicBean<SearchBean.ShowapiResBodyBean>{
                         '}';
             }
 
-            public static class ImgListBean {
+            @Override
+            public int describeContents() {
+                return 0;
+            }
+
+            @Override
+            public void writeToParcel(Parcel dest, int flags) {
+                dest.writeString(cbId);
+                dest.writeString(cl);
+                dest.writeString(introduce);
+                dest.writeString(mainType);
+                dest.writeString(name);
+                dest.writeString(type);
+                dest.writeString(zf);
+                dest.writeString(knack);
+                dest.writeTypedList(imgList);
+            }
+
+            public static class ImgListBean implements Parcelable {
                 /**
                  * 图片链接地址
                  */
                 public String imgUrl;
+
+                protected ImgListBean(Parcel in) {
+                    imgUrl = in.readString();
+                }
+
+                public static final Creator<ImgListBean> CREATOR = new Creator<ImgListBean>() {
+                    @Override
+                    public ImgListBean createFromParcel(Parcel in) {
+                        return new ImgListBean(in);
+                    }
+
+                    @Override
+                    public ImgListBean[] newArray(int size) {
+                        return new ImgListBean[size];
+                    }
+                };
 
                 @Override
                 public String toString() {
                     return "ImgListBean{" +
                             "imgUrl='" + imgUrl + '\'' +
                             '}';
+                }
+
+                @Override
+                public int describeContents() {
+                    return 0;
+                }
+
+                @Override
+                public void writeToParcel(Parcel dest, int flags) {
+                    dest.writeString(imgUrl);
                 }
             }
         }

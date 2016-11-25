@@ -1,6 +1,6 @@
 package em.sang.com.ew.mode;
 
-import android.database.sqlite.SQLiteReadOnlyDatabaseException;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,13 @@ import em.sang.com.ew.basic.BasicBean;
 import em.sang.com.ew.http.HttpParams;
 import em.sang.com.ew.http.HttpServer;
 import em.sang.com.ew.http.RetrofitUtils;
-import em.sang.com.ew.mode.bean.DetailsBean;
 import em.sang.com.ew.mode.bean.SearchBean;
 import em.sang.com.ew.mode.inter.IMainData;
-import em.sang.com.ew.presenter.IMainPresenter;
 import em.sang.com.ew.presenter.MainPresenter;
 import em.sang.com.ew.util.ConfigUtlis;
 import em.sang.com.ew.util.JLog;
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -82,7 +78,7 @@ public class MainData implements IMainData {
                 }).filter(new Func1<SearchBean.ShowapiResBodyBean.CbListBean, Boolean>() {
             @Override
             public Boolean call(SearchBean.ShowapiResBodyBean.CbListBean cbListBean) {
-                return cbListBean.imgList!=null&&cbListBean.imgList.size()>0;
+                return cbListBean.imgList!=null&&cbListBean.imgList.size()>0&& TextUtils.isEmpty(cbListBean.cbId);
             }
         })
                 .observeOn(AndroidSchedulers.mainThread())
