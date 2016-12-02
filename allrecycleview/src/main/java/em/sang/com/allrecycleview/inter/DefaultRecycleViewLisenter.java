@@ -1,13 +1,12 @@
 package em.sang.com.allrecycleview.inter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
 
 import em.sang.com.allrecycleview.holder.CustomBasicHolder;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Description：
@@ -29,6 +28,11 @@ public class DefaultRecycleViewLisenter<T> implements CustomRecycleListener<T> {
     @Override
     public CustomBasicHolder getHolderByViewType(Context context, List<T> lists, int itemID) {
         return null;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
     }
 
     /**

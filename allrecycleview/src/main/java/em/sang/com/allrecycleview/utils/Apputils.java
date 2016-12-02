@@ -1,6 +1,7 @@
 package em.sang.com.allrecycleview.utils;
 
 import android.content.Context;
+import android.view.View;
 
 /**
  * Description：
@@ -23,5 +24,22 @@ public class Apputils {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 获取控件宽高
+     * @param view
+     * @return 0为宽
+     */
+    public static int[] getWidthAndHeight(View view){
+        int[] res = new int[2];
+        int w = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0,
+                View.MeasureSpec.UNSPECIFIED);
+        view.measure(w, h);
+        res[1] = view.getMeasuredHeight();
+        res[0]= view.getMeasuredWidth();
+        return res;
     }
 }

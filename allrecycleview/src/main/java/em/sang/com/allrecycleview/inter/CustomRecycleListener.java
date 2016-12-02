@@ -2,6 +2,7 @@ package em.sang.com.allrecycleview.inter;
 
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
@@ -26,4 +27,11 @@ public interface CustomRecycleListener<T> {
      * @return
      */
     CustomBasicHolder getHolderByViewType(Context context, List<T> lists, int itemID);
+
+    /**
+     * 绑定holder
+     * @param holder
+     * @param position
+     */
+    void onBindViewHolder(RecyclerView.ViewHolder holder, int position);
 }

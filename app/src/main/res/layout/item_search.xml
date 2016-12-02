@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/card_main"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:stateListAnimator="@drawable/selector_card"
-    app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="10dp">
+    android:orientation="vertical">
 
 
     <ImageView
-
         android:id="@+id/img_main"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="15dp"
         android:scaleType="fitXY"
         android:src="@mipmap/defaul" />
 
@@ -23,7 +17,9 @@
         android:id="@+id/tv_mian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_main"
         android:layout_gravity="bottom"
+
         android:background="#aaaaaaaa"
         android:gravity="center"
         android:lines="1"
@@ -32,4 +28,4 @@
         android:textSize="15sp" />
 
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>

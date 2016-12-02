@@ -37,19 +37,23 @@ public class MainData implements IMainData {
         this.presenter = presenter;
     }
 
+
+
     @Override
-    public List<BasicBean> getData() {
-        return lists;
+    public String getSearchMsg(String msg) {
+        if (TextUtils.isEmpty(msg)){
+            int index = new Random().nextInt(searchs.length);
+            return searchs[index];
+        }else {
+            return msg;
+        }
+
+
     }
 
     @Override
-    public void initData() {
-        int index = new Random().nextInt(searchs.length);
-        getSearch(searchs[index]);
-    }
-
-
-    public void getSearch(String name) {
+    public void startSearch(String name) {
+         name = getSearchMsg(name);
         HttpServer server = RetrofitUtils.getInstance().getClient(ConfigUtlis.getConfig("search"));
         HttpParams params = new HttpParams();
 
@@ -84,6 +88,8 @@ public class MainData implements IMainData {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(presenter);
     }
+
+
 
 
 }

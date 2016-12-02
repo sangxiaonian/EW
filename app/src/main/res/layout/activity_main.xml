@@ -9,16 +9,16 @@
     android:background="@android:color/white"
     tools:context="em.sang.com.ew.ui.MainActivity">
 
+
+    
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="#333333"
         android:gravity="center"
-
         android:fitsSystemWindows="true"
         app:navigationIcon="@mipmap/menu_more"
-
         app:titleTextColor="@android:color/white">
 
         <TextView
@@ -28,14 +28,26 @@
             android:text="美食"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+        <em.sang.com.ew.view.SearchView
+            android:layout_marginRight="10dp"
+            android:padding="-5dp"
+            android:layout_gravity="right"
+            android:layout_width="160dp"
+            android:background="#333333"
+            android:id="@+id/main_search"
+            android:layout_height="wrap_content">
+        </em.sang.com.ew.view.SearchView>
+
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/menu_rc"
-        android:background="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+        <em.sang.com.allrecycleview.PullRecycleView
+            android:id="@+id/menu_rc"
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </em.sang.com.allrecycleview.PullRecycleView>
+
+
 
 </LinearLayout>

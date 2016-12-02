@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-import em.sang.com.allrecycleview.adapter.CustomBasicAdapter;
+import em.sang.com.allrecycleview.adapter.BasicAdapter;
 
 /**
  * Description：
@@ -77,7 +77,7 @@ public class DefaultGrideCutLine extends RecyclerView.ItemDecoration {
                                 int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
+            if ((pos +head+1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
             {
                 return true;
             }
@@ -85,7 +85,7 @@ public class DefaultGrideCutLine extends RecyclerView.ItemDecoration {
             int orientation = ((StaggeredGridLayoutManager) layoutManager)
                     .getOrientation();
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                if ((pos + 1) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
+                if ((pos ) % spanCount == 0)// 如果是最后一列，则不需要绘制右边
                 {
                     return true;
                 }
@@ -111,7 +111,7 @@ public class DefaultGrideCutLine extends RecyclerView.ItemDecoration {
                                  int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            if ((pos) % spanCount == 0)// 如果是第一列
+            if ((pos+head) % spanCount == 0)// 如果是第一列
             {
                 return true;
             }
@@ -168,32 +168,33 @@ public class DefaultGrideCutLine extends RecyclerView.ItemDecoration {
         }
         return false;
     }
-
+    int head;
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
         super.getItemOffsets(outRect, itemPosition, parent);
             int intrinsicHeight = mDivider.getIntrinsicHeight();
-//            intrinsicHeight = Apputils.dip2px((parent.getContext()),10);
             int spanCount = getSpanCount(parent);
             int childCount = parent.getAdapter().getItemCount();
-            CustomBasicAdapter adapter = (CustomBasicAdapter) parent.getAdapter();
-            int head = adapter.heards.size();
+            BasicAdapter adapter = (BasicAdapter) parent.getAdapter();
+             head = adapter.heards.size()+adapter.tops.size();
 
-        JLog.i(head+"====================================="+spanCount);
 
-            if (itemPosition == 0) {
+
+            if (itemPosition<head-1) {
                 outRect.set(0, 0, 0, intrinsicHeight);
-            } else if (itemPosition == 1) {
+            } else if (itemPosition == head-1 ) {
                 outRect.set(2 * intrinsicHeight, 0, 2 * intrinsicHeight, intrinsicHeight);
             } else if (head<=itemPosition&& isFirstColum(parent, itemPosition, spanCount, childCount)) {
-                outRect.set(2 * intrinsicHeight, 0, intrinsicHeight, intrinsicHeight);
+                outRect.set(2 * intrinsicHeight, 0, intrinsicHeight/2, intrinsicHeight);
             } else if (head<=itemPosition && isLastColum(parent, itemPosition, spanCount, childCount))// 如果是最后一列，则不需要绘制右边
             {
-                outRect.set(0, 0, intrinsicHeight * 2, intrinsicHeight);
+                outRect.set(intrinsicHeight/2, 0, intrinsicHeight * 2, intrinsicHeight);
             } else {
                 outRect.set(0, 0, mDivider.getIntrinsicWidth(),
                         intrinsicHeight);
             }
+
+
 
     }
 

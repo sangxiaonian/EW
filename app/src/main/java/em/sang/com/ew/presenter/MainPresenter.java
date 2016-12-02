@@ -1,6 +1,6 @@
 package em.sang.com.ew.presenter;
 
-import android.support.v7.widget.RecyclerView;
+import android.app.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import em.sang.com.ew.mode.MainData;
 import em.sang.com.ew.mode.bean.SearchBean;
 import em.sang.com.ew.mode.inter.IMainData;
 import em.sang.com.ew.ui.inter.IMainView;
+import em.sang.com.ew.util.JLog;
 import rx.Subscriber;
 
 /**
@@ -27,9 +28,8 @@ public class MainPresenter extends Subscriber<SearchBean.ShowapiResBodyBean.CbLi
         this.view = view;
         this.data = new MainData(this);
         cbListBeens = new ArrayList<>();
-        data.initData();
-    }
 
+    }
 
     @Override
     public void onStart() {
@@ -58,9 +58,11 @@ public class MainPresenter extends Subscriber<SearchBean.ShowapiResBodyBean.CbLi
 
     }
 
-
     @Override
-    public List getData() {
-        return null;
+    public String getTranData(Activity activity, String name) {
+        String extra = activity.getIntent().getStringExtra(name);
+        data.startSearch(extra);
+        JLog.i(extra);
+        return extra;
     }
 }

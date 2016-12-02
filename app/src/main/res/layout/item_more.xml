@@ -8,7 +8,7 @@
     <TextView
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:id="@+id/tx_heard"
         android:text="热门推荐"
         android:drawableStart="@drawable/item_more"

@@ -15,7 +15,6 @@ import em.sang.com.ew.http.RetrofitUtils;
 import em.sang.com.ew.mode.bean.DetailsBean;
 import em.sang.com.ew.mode.bean.SearchBean;
 import em.sang.com.ew.util.ConfigUtlis;
-import em.sang.com.ew.util.DeviceUtils;
 import em.sang.com.ew.util.JLog;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -46,7 +45,7 @@ public class MainHeaderHolder  extends HeardHolder{
 
             Glide.with(context).
                     load(((SearchBean.ShowapiResBodyBean.CbListBean) data).imgList.get(0).imgUrl)
-                    .override(DeviceUtils.getDeviceWidth(context)[0],DeviceUtils.getDeviceWidth(context)[0]*4/7)
+//                    .override(DeviceUtils.getDeviceWidth(context)[0],DeviceUtils.getDeviceWidth(context)[0]*4/7)
                     .placeholder(R.mipmap.defaul)
                     .error(R.mipmap.ic_launcher)//load失敗的Drawable
                     .centerCrop()
@@ -57,7 +56,8 @@ public class MainHeaderHolder  extends HeardHolder{
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                details(((SearchBean.ShowapiResBodyBean.CbListBean) data).cbId);
+
+                onClickHolder((SearchBean.ShowapiResBodyBean.CbListBean) data);
             }
         });
 
@@ -86,6 +86,10 @@ public class MainHeaderHolder  extends HeardHolder{
                 JLog.i("成功");
             }
         });
+    }
+
+    public void onClickHolder(SearchBean.ShowapiResBodyBean.CbListBean data) {
+
     }
 
 

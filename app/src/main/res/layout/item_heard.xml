@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+
+     >
 
 
     <ImageView
-        android:layout_marginTop="5dp"
+
+        android:clickable="false"
         android:id="@+id/img_heard"
-        android:background="#abcdef"
-        android:src="@mipmap/defaul"
         android:layout_width="match_parent"
         android:layout_height="220dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:background="#abcdef"
         android:scaleType="fitXY"
-        android:layout_alignParentEnd="true" />
+        android:src="@mipmap/defaul" />
+
     <TextView
-        android:layout_centerInParent="true"
+
+        android:clickable="false"
+        android:id="@+id/tx_heard"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:id="@+id/tx_heard"
-        android:text="不一样的美食"
-        android:gravity="center"
-        android:textSize="25sp"
+        android:layout_centerInParent="true"
         android:background="@drawable/main_heard_tvbg"
+        android:gravity="center"
+        android:text="不一样的美食"
         android:textColor="@android:color/white"
-        />
+        android:textSize="25sp" />
 </RelativeLayout>

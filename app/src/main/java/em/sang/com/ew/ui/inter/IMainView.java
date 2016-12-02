@@ -2,7 +2,6 @@ package em.sang.com.ew.ui.inter;
 
 import java.util.List;
 
-import em.sang.com.ew.basic.BasicBean;
 import em.sang.com.ew.mode.bean.SearchBean;
 
 /**
@@ -27,4 +26,5 @@ public interface IMainView {
      * @param datas 数据
      */
     void setAdapter(List< SearchBean.ShowapiResBodyBean.CbListBean> datas);
+
 }

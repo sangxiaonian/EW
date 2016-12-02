@@ -5,8 +5,9 @@ import em.sang.com.ew.basic.IBasicMode;
 
 public interface IMainData extends IBasicMode {
 
-    /**
-     * 初始化数据
-     */
-    void initData();
+
+
+    String getSearchMsg(String msg);
+
+    void   startSearch(String msg);
 }

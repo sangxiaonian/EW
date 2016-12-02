@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -24,20 +25,19 @@ import em.sang.com.ew.mode.bean.SearchBean;
  * @Author：桑小年
  * @Data：2016/11/10 14:48
  */
-public class MainBodyHolder<T> extends CustomBasicHolder {
+public class SearchBodyHolder<T> extends CustomBasicHolder {
 
     private float downX, downY, upX, upY, moveGap;
 
-
-    public MainBodyHolder(View itemView) {
+    public SearchBodyHolder(View itemView) {
         super(itemView);
     }
 
-    public MainBodyHolder(List<T> datas, View itemView) {
+    public SearchBodyHolder(List<T> datas, View itemView) {
         super(datas, itemView);
     }
 
-    public MainBodyHolder(Context context, List<T> lists, int itemID) {
+    public SearchBodyHolder(Context context, List<T> lists, int itemID) {
         super(context, lists, itemID);
     }
 
@@ -47,12 +47,18 @@ public class MainBodyHolder<T> extends CustomBasicHolder {
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img_main);
 
         final SearchBean.ShowapiResBodyBean.CbListBean data = (SearchBean.ShowapiResBodyBean.CbListBean) datas.get(position);
-        Glide.with(context).
-                load((data).imgList.get(0).imgUrl)
+        Glide.with(context)
+                .load((data).imgList.get(0).imgUrl)
+//                .override(DeviceUtils.getDeviceWidth(context)[0],DeviceUtils.getDeviceWidth(context)[0]*5/7)
                 .placeholder(R.mipmap.defaul)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.ic_launcher)//load失敗的Drawable
-                .fitCenter()
+                .centerCrop()
+                .crossFade()
                 .into(imageView);
+
+
+
         textView.setText(data.name);
         final int slop = ViewConfiguration.get(context).getScaledTouchSlop();
         itemView.setOnTouchListener(new View.OnTouchListener() {
@@ -67,17 +73,14 @@ public class MainBodyHolder<T> extends CustomBasicHolder {
                         break;
                     case MotionEvent.ACTION_CANCEL:
                         excusesmlAnimato(data, false);
-                        itemView.getParent().requestDisallowInterceptTouchEvent(false);
                         break;
                     case MotionEvent.ACTION_UP:
                         upX = event.getX();
                         upY= event.getY();
                         moveGap = Math.max(Math.abs(upX - downX), Math.abs(upY - downY));
                         if (moveGap > slop) {
-                            itemView.getParent().requestDisallowInterceptTouchEvent(false);
                             excusesmlAnimato(data, false);
                         } else {
-                            itemView.getParent().requestDisallowInterceptTouchEvent(true);
                             excusesmlAnimato(data, true);
                         }
 
@@ -85,7 +88,7 @@ public class MainBodyHolder<T> extends CustomBasicHolder {
                 }
 
 
-                return  true;
+                return true;
             }
         });
 
