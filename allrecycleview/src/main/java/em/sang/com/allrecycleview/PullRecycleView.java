@@ -1,5 +1,7 @@
 package em.sang.com.allrecycleview;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -264,6 +266,17 @@ public class PullRecycleView extends BasicRecycleView {
                 ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
                 layoutParams.height = (int) value;
                 view.setLayoutParams(layoutParams);
+            }
+        });
+
+        final int finalStand = stand;
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                if (finalStand !=0){
+                    upRefrush_state(LOADING);
+                }
             }
         });
 
